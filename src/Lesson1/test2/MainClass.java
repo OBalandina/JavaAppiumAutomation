@@ -1,11 +1,13 @@
-package lesson1.test1;
+package lesson1.test2;
 
 import org.junit.Test;
 
-public class MainClass extends MainClassTest
+public class MainClass
 {
+  int a = 20;
+
   @Test
-  public void getLocalNumber()
+  private void ClassNumber()
   {
     int number = 14;
     System.out.println(number);
