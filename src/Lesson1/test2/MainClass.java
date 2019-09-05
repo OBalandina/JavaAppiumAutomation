@@ -5,6 +5,7 @@ import org.junit.Test;
 public class MainClass
 {
   int a = 20;
+  int b = 20;
 
   @Test
   private void ClassNumber()
