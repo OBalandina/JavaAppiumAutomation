@@ -2,13 +2,14 @@ package lesson1.test1;
 
 import org.junit.Test;
 
-public class MainClass 
+public class MainClass
 {
-  @Test
-  public void getLocalNumber()
+
+  public int getLocalNumber()
   {
     int number = 14;
-    System.out.println(number);
+//    System.out.println(number);
+    return number;
   }
 
 }
