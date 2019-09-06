@@ -2,7 +2,7 @@ package lesson1.test1;
 
 import org.junit.Test;
 
-public class MainClass extends MainClassTest
+public class MainClass 
 {
   @Test
   public void getLocalNumber()

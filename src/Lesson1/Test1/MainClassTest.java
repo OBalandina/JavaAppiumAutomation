@@ -1,6 +1,6 @@
 package lesson1.test1;
 
-public class MainClassTest
+public class MainClassTest extends MainClass
 {
   public int testGetLocalNumber(int number)
   {
