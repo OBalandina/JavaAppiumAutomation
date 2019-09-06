@@ -1,9 +1,17 @@
 package lesson1.test2;
 
-public class MainClassTest
-{
-  private int testGetClassNumber(int number)
-  {
-    return number;
+import org.junit.Test;
+
+public class MainClassTest {
+  @Test
+  public void testGetClassNumber() {
+
+    MainClass a = new MainClass();
+
+    if (a.getClassNumber() > 45) {
+      System.out.println("truu");
+    } else {
+      System.out.println("false");
+    }
   }
 }
