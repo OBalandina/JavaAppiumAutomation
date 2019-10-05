@@ -179,7 +179,7 @@ public class TestEx5 {
             5);
 
     waitForElementPresent(
-            By.id("org.wikipedia:id/view_page_title_text"),
+            By.id("org.wikipedia:id/view_page_title_text"),  // ищем название текста (хедер) по resource-id
             "Cannot Article Title",
             5);
 
@@ -203,9 +203,13 @@ public class TestEx5 {
         "Cannot find input to set name of articles folder", // очищаем текст
         5);
 
+
+   String name_of_Folder = "Learning Programming";
+
+
     waitForElementAndSendKeys(
             By.id("org.wikipedia:id/text_input"),
-            "Learning Programming",
+            name_of_Folder ,   // "Learning Programming"
             "Cannot put text into articles folder input",  // ввод значения в строку, наименование папки "Learning Programming"
             5);
 
@@ -214,10 +218,36 @@ public class TestEx5 {
             " Cannot press 'OK' button",
             5);
 
-//    waitForElementAndClick(
-//            By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"), // из аппиум берем class и content-desc нашла кнопку с помощью App Sourse  в аппиум
-//            "Cannot close article, cannot find X link", // закрываем кнопку X
+    waitForElementAndClick(
+            By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"), // из аппиум берем class и content-desc нашла кнопку с помощью App Sourse  в аппиум
+            "Cannot close article, cannot find X link", // не находим кнопку X (слева вврху)
+            5);
+
+    waitForElementAndClick(
+            By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"), // из аппиум берем class и content-desc
+            "Cannot find navigation button to 'My lists'", // не находим кнопку Му лист
+            5);
+
+    waitForElementAndClick(
+            By.xpath("//*[@text='"+ name_of_Folder +"']"), // из аппиум берем text   "//*[@text='Learning Programming']"
+            "Cannot find created folder", // не находим список 'Learning Programming'
+            5);
+
+//    waitForElementPresent(
+//            By.id("org.wikipedia:id/item_container"),  // ищем название текста (хедер) по resource-id
+//            "Cannot find folder",
 //            5);
+
+      swipeElementToLeft(
+              By.xpath("//*[@text='Java (programming language)']"), // из аппиум берем text
+              "Cannot find saved article" );         // не находим в списке 'Learning Programming' -Java (programming language)
+
+
+    waitForElementNotPresent(
+            By.xpath("//*[@text='Java (programming language)']"), // из аппиум берем text
+            "Cannot delete saved  article",
+            5);
+
 
 
   }
@@ -267,7 +297,11 @@ public class TestEx5 {
     int x = size.width / 2;
     int start_y = (int)(size.height * 0.8);
     int end_y = (int)(size.height * 0.2);
-    action.press(x, start_y).waitAction(timeOfSwipe).moveTo(x, end_y).release().perform();
+    action.press(x, start_y)
+            .waitAction(timeOfSwipe)
+            .moveTo(x, end_y)
+            .release().
+            perform();
 
   }
 
@@ -294,5 +328,33 @@ protected  void swipeUpToFindElement(By by,String error_message,int max_swipes) 
       ++already_swiped;
     }
   }
+
+
+  protected void swipeElementToLeft(By by,String error_message)
+  {
+    WebElement element = waitForElementPresent(
+            by,
+            error_message,
+            10);
+
+    int left_x = element.getLocation().getX();
+    int right_x = left_x + element.getSize().getWidth();
+    int upper_y = element.getLocation().getY();
+    int lower_y = upper_y + element.getSize().getHeight();
+    int middle_y = (upper_y + lower_y)/2;
+
+    TouchAction action = new TouchAction(driver);
+    action.
+            press(right_x,middle_y)
+            .waitAction(300).
+            moveTo(left_x,middle_y).
+            release().
+            perform();
+
+
+  }
+
+
+
 }
 
