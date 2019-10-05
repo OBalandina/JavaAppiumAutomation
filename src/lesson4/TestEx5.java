@@ -126,37 +126,37 @@ public class TestEx5 {
 //            article_title);
 //  }
 
-  @Test
-  public void testSwipeArticle(){
-    waitForElementAndClick(
-            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    waitForElementAndSendKeys(
-            By.xpath("//*[contains(@text,'Search…')]"),
-            "Appium",
-            "Cannot find search input",
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"),
-            "Cannot find 'Appium' article in Search",
-            5);
-
-    waitForElementPresent(
-            By.id("org.wikipedia:id/view_page_title_text"),
-            "Cannot find 'Article Title'",
-            15);
-
-
-    swipeUpToFindElement(
-    By.xpath("//*[@text='View page in browser']"),
-            "Cannot find the end of the article",
-            15);
-
-
-  }
+//  @Test
+//  public void testSwipeArticle(){
+//    waitForElementAndClick(
+//            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            "Appium",
+//            "Cannot find search input",
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"),
+//            "Cannot find 'Appium' article in Search",
+//            5);
+//
+//    waitForElementPresent(
+//            By.id("org.wikipedia:id/view_page_title_text"),
+//            "Cannot find 'Article Title'",
+//            15);
+//
+//
+//    swipeUpToFindElement(
+//    By.xpath("//*[@text='View page in browser']"),
+//            "Cannot find the end of the article",
+//            15);
+//
+//
+//  }
 
 
   @Test
@@ -189,9 +189,9 @@ public class TestEx5 {
             5 );
 
     waitForElementAndClick(
-            By.xpath("//*[@text='Add to reading list']"), // в кнопке опции клик по 'Add to reading list'
+            By.xpath("//*[@text='Add to reading list']"),       // в кнопке опции клик по 'Add to reading list' ("//*[@text='Add to reading list']")
             "Cannot find option to 'Add to reading list'",
-            5);
+            15);
 
     waitForElementAndClick(
             By.id("org.wikipedia:id/onboarding_button"), // из аппиум берем resource-id кнопки
@@ -223,6 +223,54 @@ public class TestEx5 {
             "Cannot close article, cannot find X link", // не находим кнопку X (слева вврху)
             5);
 
+
+// вводим слово Appium
+
+    waitForElementAndClick(
+            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+            "Cannot find 'Search Wikipedia' input too",
+            5);
+
+    waitForElementAndSendKeys(
+            By.xpath("//*[contains(@text,'Search…')]"),
+            "Appium",
+            "Cannot find search input 'Appium'",
+            5);
+
+    waitForElementAndClick(
+            By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"),
+            "Cannot find 'Appium' article in Search",
+            5);
+
+
+    waitForElementPresent(
+            By.id("org.wikipedia:id/view_page_title_text"),  // ищем название текста (хедер) по resource-id
+            "Cannot find Article Title 'Appium'",
+            5);
+
+    waitForElementAndClick(
+            By.xpath("//android.widget.ImageView[@content-desc='More options']"),   // из аппиум берем class и content-desc
+            "Cannot find button to open article options for 2 test", // кнопка опции - три точки в правом вверхнем углу
+            5 );
+
+    waitForElementAndClick(
+            By.xpath("//*[@text='Add to reading list']"), // в кнопке опции клик по 'Add to reading list'
+            "Cannot find option to 'Add to reading list' for 2 test",
+            5);
+
+    waitForElementAndClick(
+            By.id("org.wikipedia:id/item_container"), // из аппиум берем resource-id кнопки
+            "Cannot find button 'Learning Programming'",
+            5);
+
+    waitForElementAndClick(
+            By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"), // из аппиум берем class и content-desc нашла кнопку с помощью App Sourse  в аппиум
+            "Cannot close article, cannot find X link for 2 test", // не находим кнопку X (слева вврху)
+            5);
+
+
+
+
     waitForElementAndClick(
             By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"), // из аппиум берем class и content-desc
             "Cannot find navigation button to 'My lists'", // не находим кнопку Му лист
@@ -238,7 +286,7 @@ public class TestEx5 {
 //            "Cannot find folder",
 //            5);
 
-      swipeElementToLeft(
+    swipeElementToLeft(
               By.xpath("//*[@text='Java (programming language)']"), // из аппиум берем text
               "Cannot find saved article" );         // не находим в списке 'Learning Programming' -Java (programming language)
 
