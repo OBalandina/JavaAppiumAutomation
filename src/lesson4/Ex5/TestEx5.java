@@ -189,7 +189,7 @@ public class TestEx5 {
             5);
 
     waitForElementAndClick(
-            By.xpath("//*[@text='Find in page']"),       // в кнопке опции клик по 'Add to reading list' ("//*[@text='Add to reading list']")
+            By.xpath("//*[@text='Add to reading list']"),       // в кнопке опции клик по 'Add to reading list' ('Find in page') ("//*[@text='Add to reading list']")
             "Cannot find option to 'Add to reading list'",
             15);
 
@@ -254,7 +254,7 @@ public class TestEx5 {
             5);
 
     waitForElementAndClick(
-            By.xpath("//*[@text='Find in page']"), // в кнопке опции клик по 'Add to reading list'
+            By.xpath("//*[@text='Add to reading list']"), // в кнопке опции клик по 'Add to reading list'
             "Cannot find option to 'Add to reading list' for 2 test",
             5);
 
