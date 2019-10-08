@@ -128,200 +128,202 @@ public class TestEx7 {
 //            article_title);
 //  }
 
-  @Test
-  public void testSwipeArticle(){
-    waitForElementAndClick(
-            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    waitForElementAndSendKeys(
-            By.xpath("//*[contains(@text,'Search…')]"),
-            "Appium",
-            "Cannot find search input",
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"),
-            "Cannot find 'Appium' article in Search",
-            5);
-
-    waitForElementPresent(
-            By.id("org.wikipedia:id/view_page_title_text"),
-            "Cannot find 'Article Title'",
-            15);
-
-
-    swipeUpToFindElement(
-    By.xpath("//*[@text='View page in browser']"),
-            "Cannot find the end of the article",
-            15);
-
-
-  }
-
-
-  @Test
-  public  void saveFirstArticleToMyList()    // сохранение в лист
-  {
-    waitForElementAndClick(
-            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    waitForElementAndSendKeys(
-            By.xpath("//*[contains(@text,'Search…')]"),
-            "Java",
-            "Cannot find search input",
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    waitForElementPresent(
-            By.id("org.wikipedia:id/view_page_title_text"),  // ищем название текста (хедер) по resource-id
-            "Cannot Article Title",
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//android.widget.ImageView[@content-desc='More options']"),   // из аппиум берем class и content-desc
-            "Cannot find button to open article options ", // кнопка опции - три точки в правом вверхнем углу
-            5 );
-
-    waitForElementAndClick(
-            By.xpath("//*[@text='Add to reading list']"), // в кнопке опции клик по 'Add to reading list'
-            "Cannot find option to 'Add to reading list'",
-            5);
-
-    waitForElementAndClick(
-            By.id("org.wikipedia:id/onboarding_button"), // из аппиум берем resource-id кнопки
-            "Cannot find button 'GOT IT'",
-            5);
-
-    waitForElementAndClear(
-        By.id("org.wikipedia:id/text_input"),
-        "Cannot find input to set name of articles folder", // очищаем текст
-        5);
-
-
-   String name_of_Folder = "Learning Programming";
-
-
-    waitForElementAndSendKeys(
-            By.id("org.wikipedia:id/text_input"),
-            name_of_Folder ,   // "Learning Programming"
-            "Cannot put text into articles folder input",  // ввод значения в строку, наименование папки "Learning Programming"
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//*[@text='OK']"),  //нажимаем кнопку "ок"
-            " Cannot press 'OK' button",
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"), // из аппиум берем class и content-desc нашла кнопку с помощью App Sourse  в аппиум
-            "Cannot close article, cannot find X link", // не находим кнопку X (слева вврху)
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"), // из аппиум берем class и content-desc
-            "Cannot find navigation button to 'My lists'", // не находим кнопку Му лист
-            5);
-
-    waitForElementAndClick(
-            By.xpath("//*[@text='"+ name_of_Folder +"']"), // из аппиум берем text   "//*[@text='Learning Programming']"
-            "Cannot find created folder", // не находим список 'Learning Programming'
-            5);
-
-//    waitForElementPresent(
-//            By.id("org.wikipedia:id/item_container"),  // ищем название текста (хедер) по resource-id
-//            "Cannot find folder",
+//  @Test
+//  public void testSwipeArticle(){
+//    waitForElementAndClick(
+//            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+//            "Cannot find 'Search Wikipedia' input",
 //            5);
-
-    swipeElementToLeft(
-              By.xpath("//*[@text='Java (programming language)']"), // из аппиум берем text
-              "Cannot find saved article" );         // не находим в списке 'Learning Programming' -Java (programming language)
-
-
-    waitForElementNotPresent(
-            By.xpath("//*[@text='Java (programming language)']"), // из аппиум берем text
-            "Cannot delete saved  article",
-            5);
-
-
-
-  }
-
-  @Test
-  public void testAmountOfNotEmptySearch()
-  {
-    waitForElementAndClick(
-            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    String search_line = "Linking Park discography";
-
-    waitForElementAndSendKeys(
-            By.xpath("//*[contains(@text,'Search…')]"),
-            search_line,
-            "Cannot find search input",
-            5);
-
-    String search_result_locator = "//*[@resource_id='org.wikipedia:id/search_results_list']/*[@resource_id='org.wikipedia:id/page_list_item_title']";   // resource_id для родителя и затем для доченего элемента
-
-    waitForElementPresent(
-            By.xpath(search_result_locator),
-            "Cannot find anything by the request" + search_line,
-            15);
-
-
-
-    int amount_of_search_results = getAmoundOfElements(
-            By.xpath(search_result_locator)
-    );
-
-    Assert.assertTrue(
-            "We found too few results!",
-            amount_of_search_results>0
-    );
-  }
-
-  @Test
-  public void testAmountOfEmptySearch ()
-  {
-    waitForElementAndClick(
-            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    String search_line = "dfdghfjfjfjfj";
-
-    waitForElementAndSendKeys(
-            By.xpath("//*[contains(@text,'Search…')]"),
-            search_line,
-            "Cannot find search input",
-            5);
-
-    String search_result_locator = "//*[@resource_id='org.wikipedia:id/search_results_list']/*[@resource_id='org.wikipedia:id/page_list_item_title']";   // resource_id для родителя и затем для доченего элемента
-    String empty_result_label = "//*[@text='No results found']";
-
-    waitForElementPresent(
-            By.xpath(empty_result_label),
-            "Cannot find empty result label by the request" + search_line,
-            15);
-
-    assertElementNotPresent(
-            By.xpath(search_result_locator),
-            "We've found some results by request" + search_line);
-
-  }
+//
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            "Appium",
+//            "Cannot find search input",
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@resource-id='org.wikipedia:id/search_container']//*[@text='Search Wikipedia']"),
+//            "Cannot find 'Appium' article in Search",
+//            5);
+//
+//    waitForElementPresent(
+//            By.id("org.wikipedia:id/view_page_title_text"),
+//            "Cannot find 'Article Title'",
+//            15);
+//
+//
+//    swipeUpToFindElement(
+//    By.xpath("//*[@text='View page in browser']"),
+//            "Cannot find the end of the article",
+//            15);
+//
+//
+//  }
+//
+//
+//  @Test
+//  public  void saveFirstArticleToMyList()    // сохранение в лист
+//  {
+//    waitForElementAndClick(
+//            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            "Java",
+//            "Cannot find search input",
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    waitForElementPresent(
+//            By.id("org.wikipedia:id/view_page_title_text"),  // ищем название текста (хедер) по resource-id
+//            "Cannot Article Title",
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//android.widget.ImageView[@content-desc='More options']"),   // из аппиум берем class и content-desc
+//            "Cannot find button to open article options ", // кнопка опции - три точки в правом вверхнем углу
+//            5 );
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@text='Add to reading list']"), // в кнопке опции клик по 'Add to reading list'
+//            "Cannot find option to 'Add to reading list'",
+//            5);
+//
+//    waitForElementAndClick(
+//            By.id("org.wikipedia:id/onboarding_button"), // из аппиум берем resource-id кнопки
+//            "Cannot find button 'GOT IT'",
+//            5);
+//
+//    waitForElementAndClear(
+//        By.id("org.wikipedia:id/text_input"),
+//        "Cannot find input to set name of articles folder", // очищаем текст
+//        5);
+//
+//
+//   String name_of_Folder = "Learning Programming";
+//
+//
+//    waitForElementAndSendKeys(
+//            By.id("org.wikipedia:id/text_input"),
+//            name_of_Folder ,   // "Learning Programming"
+//            "Cannot put text into articles folder input",  // ввод значения в строку, наименование папки "Learning Programming"
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@text='OK']"),  //нажимаем кнопку "ок"
+//            " Cannot press 'OK' button",
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"), // из аппиум берем class и content-desc нашла кнопку с помощью App Sourse  в аппиум
+//            "Cannot close article, cannot find X link", // не находим кнопку X (слева вврху)
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"), // из аппиум берем class и content-desc
+//            "Cannot find navigation button to 'My lists'", // не находим кнопку Му лист
+//            5);
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@text='"+ name_of_Folder +"']"), // из аппиум берем text   "//*[@text='Learning Programming']"
+//            "Cannot find created folder", // не находим список 'Learning Programming'
+//            5);
+//
+////    waitForElementPresent(
+////            By.id("org.wikipedia:id/item_container"),  // ищем название текста (хедер) по resource-id
+////            "Cannot find folder",
+////            5);
+//
+//    swipeElementToLeft(
+//              By.xpath("//*[@text='Java (programming language)']"), // из аппиум берем text
+//              "Cannot find saved article" );         // не находим в списке 'Learning Programming' -Java (programming language)
+//
+//
+//    waitForElementNotPresent(
+//            By.xpath("//*[@text='Java (programming language)']"), // из аппиум берем text
+//            "Cannot delete saved  article",
+//            5);
+//
+//
+//
+//  }
+//
+//  @Test
+//  public void testAmountOfNotEmptySearch()
+//  {
+//    waitForElementAndClick(
+//            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    String search_line = "Linking Park discography";
+//
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            search_line,
+//            "Cannot find search input",
+//            5);
+//
+//    String search_result_locator = "//*[@resource_id='org.wikipedia:id/search_results_list']/*[@resource_id='org.wikipedia:id/page_list_item_title']";   // resource_id для родителя и затем для доченего элемента
+//
+//    waitForElementPresent(
+//            By.xpath(search_result_locator),
+//            "Cannot find anything by the request" + search_line,
+//            15);
+//
+//
+//
+//    int amount_of_search_results = getAmoundOfElements(
+//            By.xpath(search_result_locator)
+//    );
+//
+//    Assert.assertTrue(
+//            "We found too few results!",
+//            amount_of_search_results>0
+//    );
+//  }
+//
+//  @Test
+//  public void testAmountOfEmptySearch ()
+//  {
+//    waitForElementAndClick(
+//            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    String search_line = "dfdghfjfjfjfj";
+//
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            search_line,
+//            "Cannot find search input",
+//            5);
+//
+//    String search_result_locator = "//*[@resource_id='org.wikipedia:id/search_results_list']/*[@resource_id='org.wikipedia:id/page_list_item_title']";   // resource_id для родителя и затем для доченего элемента
+//    String empty_result_label = "//*[@text='No results found']";
+//
+//    waitForElementPresent(
+//            By.xpath(empty_result_label),
+//            "Cannot find empty result label by the request" + search_line,
+//            15);
+//
+//    assertElementNotPresent(
+//            By.xpath(search_result_locator),
+//            "We've found some results by request" + search_line);
+//
+//  }
 
   @Test
   public  void testChangeScreenOrientationOnSearchResults ()
   {
+    driver.rotate(ScreenOrientation.PORTRAIT);
+
     waitForElementAndClick(
             By.xpath("//*[contains(@text,'Search Wikipedia')]"),
             "Cannot find 'Search Wikipedia' input",
@@ -373,33 +375,33 @@ public class TestEx7 {
   }
 
 
-  @Test
-  public void testCheckSearchArticleInBackground ()
-  {
-    waitForElementAndClick(
-            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    waitForElementAndSendKeys(
-            By.xpath("//*[contains(@text,'Search…')]"),
-            "Java",
-            "Cannot find search input",
-            5);
-
-    waitForElementPresent(
-            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    driver.runAppInBackground(2);
-
-    waitForElementPresent(
-            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
-            "Cannot find article after returning from background",
-            5);
-
-  }
+//  @Test
+//  public void testCheckSearchArticleInBackground ()
+//  {
+//    waitForElementAndClick(
+//            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            "Java",
+//            "Cannot find search input",
+//            5);
+//
+//    waitForElementPresent(
+//            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    driver.runAppInBackground(2);
+//
+//    waitForElementPresent(
+//            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
+//            "Cannot find article after returning from background",
+//            5);
+//
+//  }
 
 
 
