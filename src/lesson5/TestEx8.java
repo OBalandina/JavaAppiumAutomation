@@ -434,8 +434,7 @@ public class TestEx8 extends CoreTestCase {
             "We found too few results!",
             amount_of_search_results > 0 );
 
-    ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
-    ArticlePageObject.openArticle();
+    SearchPageObject.waitClickOnArticle();
 
   }
 
