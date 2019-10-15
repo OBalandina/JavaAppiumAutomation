@@ -36,8 +36,10 @@ public class TestEx4 {
     driver.quit();
   }
 
+
+
 //  @Test
-//  public void firstTest() {
+//  public void testSearch() {
 //
 //    waitForElementAndClick(
 //            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
@@ -93,36 +95,111 @@ public class TestEx4 {
 //
 //  }
 
+      /* Ex4* */
   @Test
-  public void testCompareArticleTitle(){
+  public void testSearchWordsInSearch () {
+
     waitForElementAndClick(
-            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+            By.id("org.wikipedia:id/search_container"),
             "Cannot find 'Search Wikipedia' input",
-            5);
+            5
+    );
+
+    String word = "Java";
 
     waitForElementAndSendKeys(
             By.xpath("//*[contains(@text,'Search…')]"),
-            "Java",
+            word,
             "Cannot find search input",
             5);
 
-    waitForElementAndClick(
-            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
-            "Cannot find 'Search Wikipedia' input",
-            5);
-
-    WebElement title_element = waitForElementPresent(
-            By.id("org.wikipedia:id/view_page_title_text"),
-            "Cannot Article Title",
+    waitForElementPresent(
+            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[contains(@text,'Java')]"),
+            "Cannot find element 'word'",
             15);
 
-    String article_title =title_element.getAttribute("text");
-
-    Assert.assertEquals(
-            "We see unexpected title",
-            "Java (programming language)",
-            article_title);
   }
+
+
+//    waitForElementPresent(
+//            By.id ("org.wikipedia:id/page_list_item_title"),
+//            "Cannot find 'Object-oriented programming language' topic searchink by 'Java'",
+//            15);
+//
+//    WebElement title_element = waitForElementPresent(
+//            By.id("org.wikipedia:id/page_list_item_title"),
+//            "Cannot find in 'Search' value 'word'",
+//            15) ;
+//
+//     String article_title = title_element.getAttribute("text");
+////
+//     Assert.assertEquals(
+//            "Text in 'Search' != value 'word' ",
+//            "It's ok - 'word'",
+//             article_title);
+
+
+
+
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            "Java",
+//            "Cannot find search input",
+//            5);
+//
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    WebElement title_element = waitForElementPresent(
+//            By.id("org.wikipedia:id/view_page_title_text"),
+//            "Cannot Article Title",
+//            15);
+//
+//    String article_title =title_element.getAttribute("text");
+//
+//    Assert.assertEquals(
+//            "We see unexpected title",
+//            "Java (programming language)",
+//            article_title);
+
+
+
+
+
+//  @Test
+//  public void testCompareArticleTitle(){
+//    waitForElementAndClick(
+//            By.xpath ("//*[contains(@text,'Search Wikipedia')]"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    waitForElementAndSendKeys(
+//            By.xpath("//*[contains(@text,'Search…')]"),
+//            "Java",
+//            "Cannot find search input",
+//            5);
+//
+//
+//    waitForElementAndClick(
+//            By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Object-oriented programming language']"),
+//            "Cannot find 'Search Wikipedia' input",
+//            5);
+//
+//    WebElement title_element = waitForElementPresent(
+//            By.id("org.wikipedia:id/view_page_title_text"),
+//            "Cannot Article Title",
+//            15);
+//
+//    String article_title =title_element.getAttribute("text");
+//
+//    Assert.assertEquals(
+//            "We see unexpected title",
+//            "Java (programming language)",
+//            article_title);
+//  }
 
   private WebElement waitForElementPresent(By by, String error_message, long timeOutInSeconds) {
     WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
