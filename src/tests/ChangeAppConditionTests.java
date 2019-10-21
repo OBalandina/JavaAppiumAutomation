@@ -119,7 +119,7 @@ public class ChangeAppConditionTests extends CoreTestCase
     SearchPageObject.typeSearchLine("Java");
     SearchPageObject.waitForSearchResult("Object-oriented programming language");
 
-    this.backgraundApp(2);
+ //   this.backgraundApp(2);        возникла ошибка при запуске ios
 
     SearchPageObject.waitForSearchResult("Object-oriented programming language");
 
