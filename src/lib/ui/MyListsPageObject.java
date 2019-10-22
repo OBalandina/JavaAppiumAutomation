@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 public class MyListsPageObject extends MainPageObject
 {
   public  static final String
-  FOLDER_BY_NAME_TPL = "//*[@text='{FOLDER_NAME}']",
-  ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']";
+  FOLDER_BY_NAME_TPL = "xpath://*[@text='{FOLDER_NAME}']",
+  ARTICLE_BY_TITLE_TPL = "xpath://*[@text='{TITLE}']";
 
   private static String getFolderXpathByName(String name_of_folder)
   {
@@ -31,7 +31,7 @@ public class MyListsPageObject extends MainPageObject
     String folder_name_xpath = getFolderXpathByName(name_of_folder);
 
     this.waitForElementAndClick(
-    By.xpath(folder_name_xpath), // из аппиум берем text   "//*[@text='Learning Programming']"
+    folder_name_xpath, // из аппиум берем text   "//*[@text='Learning Programming']"
     "Cannot find folder by name" + name_of_folder, // не находим список 'Learning Programming'
     5);
   }
@@ -40,7 +40,7 @@ public class MyListsPageObject extends MainPageObject
   {
     String article_xpath = getFolderXpathByName(article_title);
     this.waitForElementPresent(
-            By.xpath(article_xpath),
+            article_xpath,
             "Cannot find saved article by title" + article_title,
             15);
   }
@@ -49,7 +49,7 @@ public class MyListsPageObject extends MainPageObject
   {
     String article_xpath = getFolderXpathByName(article_title);
     this.waitForElementNotPresent(
-            By.xpath(article_xpath),
+            article_xpath,
             "Saved article still present with title" + article_title,
             15);
   }
@@ -61,7 +61,7 @@ public class MyListsPageObject extends MainPageObject
     String article_xpath = getFolderXpathByName(article_title);
 
     this.swipeElementToLeft(
-    By.xpath(article_xpath), // из аппиум берем text
+    article_xpath, // из аппиум берем text
     "Cannot find saved article" );         // не находим в списке 'Learning Programming' -Java (programming language)
 
     this.waitForArticleToDisappearByTitle(article_title);

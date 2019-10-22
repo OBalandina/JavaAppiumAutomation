@@ -7,7 +7,7 @@ public class NavigationUI extends MainPageObject {
 
 
   private static final String
-     MY_LISTS_LINK ="//android.widget.FrameLayout[@content-desc='My lists']";
+     MY_LISTS_LINK ="xpath://android.widget.FrameLayout[@content-desc='My lists']";
 
 
 
@@ -19,7 +19,7 @@ public class NavigationUI extends MainPageObject {
   public void clickMyLists ()
   {
   this.waitForElementAndClick(
-            By.xpath(MY_LISTS_LINK), // из аппиум берем class и content-desc
+            MY_LISTS_LINK, // из аппиум берем class и content-desc
             "Cannot find navigation button to 'My lists'", // не находим кнопку Му лист
             5);
   }
