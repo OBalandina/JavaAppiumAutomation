@@ -2,19 +2,20 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebElement;
+import lib.Platform;
 
-public class ArticlePageObject extends MainPageObject {
+abstract public class ArticlePageObject extends MainPageObject {
 
-  private  static final String
-          TITLE = "id:org.wikipedia:id/view_page_title_text",
-          FOOTER_ELEMENT = "xpath://*[@text='View page in browser']",
-          OPTIONS_BUTTON = "xpath://android.widget.ImageView[@content-desc='More options']",
-          OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath://*[@text='Find in page']",
-          ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button",
-          MY_LiST_NAME_IMPUT = "id:org.wikipedia:id/text_input",
-          MY_LIST_OK_BUTTON = "xpath://*[@text='OK']",
-          CLOSE_ARTIKLE_BUTTON= "xpath://android.widget.ImageButton[@content-desc='Navigate up']",
-          OPEN_CREATED_LIST = "xpath:org.wikipedia:id/item_title";
+  protected static String
+          TITLE,
+          FOOTER_ELEMENT,
+          OPTIONS_BUTTON,
+          OPTIONS_ADD_TO_MY_LIST_BUTTON,
+          ADD_TO_MY_LIST_OVERLAY,
+          MY_LiST_NAME_IMPUT,
+          MY_LIST_OK_BUTTON,
+          CLOSE_ARTIKLE_BUTTON,
+          OPEN_CREATED_LIST;
 
 
   public  ArticlePageObject (AppiumDriver driver)
