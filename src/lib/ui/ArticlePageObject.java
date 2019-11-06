@@ -8,6 +8,7 @@ abstract public class ArticlePageObject extends MainPageObject {
 
   protected static String
           TITLE,
+          TITLE_APPIUM,
           FOOTER_ELEMENT,
           OPTIONS_BUTTON,
           OPTIONS_ADD_TO_MY_LIST_BUTTON,
@@ -28,19 +29,37 @@ abstract public class ArticlePageObject extends MainPageObject {
     return this.waitForElementPresent(TITLE,"Cannot find article title on page",10);
   }
 
-  public String getArticleTitle()
+  public WebElement waitForTitleElementAppium()
   {
+    return this.waitForElementPresent(TITLE_APPIUM,"Cannot find article title 'Appium' on page",10);
+  }
+
+  public String getArticleTitle() {
     WebElement title_element = waitForTitleElement();
-    return  title_element.getAttribute("text");
+    if (Platform.getInstance().isAndroid()) {
+      return title_element.getAttribute("text");
+    } else {
+      return title_element.getAttribute("name");
+    }
 
   }
 
   public void swipeToFooter()
   {
-    this.swipeUpToFindElement(
-            FOOTER_ELEMENT,
-            "Cannot find the end of article",
-            20);
+
+    if (Platform.getInstance().isAndroid())
+    {
+      this.swipeUpToFindElement(
+              FOOTER_ELEMENT,
+              "Cannot find the end of article",
+              40);
+    }  else
+      {
+      this.swipeUpTitleElementAppear(
+              FOOTER_ELEMENT,
+              "Cannot find the end of article",
+              40);
+      }
   }
 
   public void addArticleToMyList(String name_of_folder)
@@ -98,7 +117,13 @@ abstract public class ArticlePageObject extends MainPageObject {
 
   }
 
+   public  void  addArticlesToMySaved(){
+    this.waitForElementAndClick(
+            OPTIONS_ADD_TO_MY_LIST_BUTTON,
+            "Cannot find option to add article to reading list",
+            10);
 
+   }
 
 
   public void closeArticle()

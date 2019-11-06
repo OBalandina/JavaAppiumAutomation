@@ -14,7 +14,7 @@ public class WelcomePageObject extends MainPageObject
     STEP_LEARN_MORE_ABOUT_DATA_COLLECTED = "id:Learn more about data collected",
     NEXT_LINK = "id:Next",
     GET_STARTED_BUTTON = "id:Get started",
-    SKIP = "id:Skip";
+    SKIP = "xpath://XCUIElementTypeButton[@name='Skip']";
 
 
 

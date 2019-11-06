@@ -7,9 +7,10 @@ public class iOSArticlePageObject extends ArticlePageObject
 {
     static {
 
-        TITLE = "id:Java programming language";
-        FOOTER_ELEMENT = "id:View article in browser";
-        OPTIONS_ADD_TO_MY_LIST_BUTTON = "id:Save for later";
+        TITLE = "id:'Java (programming language)'";
+        TITLE_APPIUM = "";
+        FOOTER_ELEMENT = "id:'View article in browser'";
+        OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath://XCUIElementTypeToolbar[@name='Toolbar']/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther";
         CLOSE_ARTIKLE_BUTTON = "id:Back";
 //        OPEN_CREATED_LIST = "xpath:org.wikipedia:id/item_title";
     }
